@@ -1,3 +1,4 @@
+#include <fstream>
 #include <iostream>
 #include <pqxx/pqxx>
 
@@ -52,6 +53,21 @@ void createTables(connection * C) {
 }
 
 void initPlayer(connection * C) {
+  int player_id, team_id, uniform_num, mpg, ppg, rpg, apg;
+  string first_name, last_name;
+  double spg, bpg;
+  string line;
+  ifstream ifs;
+  ifs.open("player.txt", ifstream::in);
+  while (getline(ifs, line)) {
+    stringstream buffer;
+    buffer << line;
+    buffer >> player_id >> team_id >> uniform_num >> first_name >> last_name >> mpg >>
+        ppg >> rpg >> apg >> spg >> bpg;
+    add_player(
+        C, team_id, uniform_num, first_name, last_name, mpg, ppg, rpg, apg, spg, bpg);
+  }
+  ifs.close();
 }
 
 void initTeam(connection * C) {
@@ -88,6 +104,7 @@ int main(int argc, char * argv[]) {
   //      load each table with rows from the provided source txt files
   try {
     createTables(C);
+    initPlayer(C);
   }
   catch (const exception & e) {
     cerr << e.what() << endl;
