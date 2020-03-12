@@ -14,7 +14,7 @@ void add_player(connection * C,
   work W(*C);
   stringstream sql;
   sql << "INSERT INTO PLAYER "
-         "(PLAYER_ID,TEAM_ID,UNIFORM_NUM,FIRST_NAME,LAST_NAME,MPG,PPG,RPG, APG, SPG, "
+         "(TEAM_ID,UNIFORM_NUM,FIRST_NAME,LAST_NAME,MPG,PPG,RPG, APG, SPG, "
          "BPG) VALUES ("
       << team_id << "," << jersey_num << ",'" << first_name << "','" << last_name << "',"
       << mpg << "," << ppg << "," << rpg << "," << apg << "," << spg << "," << bpg
