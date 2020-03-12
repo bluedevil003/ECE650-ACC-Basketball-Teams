@@ -6,12 +6,11 @@
 using namespace std;
 using namespace pqxx;
 
-void dropTables(connection * C) {
-}
-
 void createTables(connection * C) {
+  string drop_sql = "DROP TABLE IF EXISTS PLAYER, TEAM, STATE, COLOR;";
+
   string player_sql = "CREATE TABLE PLAYER("
-                      "PLAYER_ID INT NOT NULL,"
+                      "PLAYER_ID SERIAL PRIMARY KEY NOT NULL,"
                       "TEAM_ID INT NOT NULL,"
                       "UNIFORM_NUM INT NOT NULL,"
                       "FIRST_NAME VARCHAR(100) NOT NULL,"
@@ -23,11 +22,31 @@ void createTables(connection * C) {
                       "SPG REAL NOT NULL,"
                       "BPG REAL NOT NULL);";
 
+  string team_sql = "CREATE TABLE TEAM("
+                    "TEAM_ID SERIAL PRIMARY KEY NOT NULL,"
+                    "NAME VARCHAR(100) NOT NULL,"
+                    "STATE_ID INT NOT NULL,"
+                    "COLOR_ID INT NOT NULL,"
+                    "WINS INT NOT NULL,"
+                    "LOSSES INT NOT NULL);";
+
+  string state_sql = "CREATE TABLE STATE("
+                     "STATE_ID SERIAL PRIMARY KEY NOT NULL,"
+                     "NAME VARCHAR(100) NOT NULL);";
+
+  string color_sql = "CREATE TABLE COLOR("
+                     "COLOR_ID SERIAL PRIMARY KEY NOT NULL,"
+                     "NAME VARCHAR(100) NOT NULL);";
+
   //create a transactional object
   work W(*C);
 
   //execute SQL query
+  W.exec(drop_sql);
   W.exec(player_sql);
+  W.exec(team_sql);
+  W.exec(state_sql);
+  W.exec(color_sql);
 
   W.commit();
 }
