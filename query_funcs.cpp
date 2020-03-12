@@ -14,11 +14,11 @@ void add_player(connection * C,
   work W(*C);
   stringstream sql;
   sql << "INSERT INTO PLAYER "
-         "(TEAM_ID,UNIFORM_NUM,FIRST_NAME,LAST_NAME,MPG,PPG,RPG, APG, SPG, "
+         "(TEAM_ID,UNIFORM_NUM,FIRST_NAME,LAST_NAME,MPG,PPG,RPG,APG,SPG,"
          "BPG) VALUES ("
-      << team_id << "," << jersey_num << ",'" << first_name << "','" << last_name << "',"
-      << mpg << "," << ppg << "," << rpg << "," << apg << "," << spg << "," << bpg
-      << ");";
+      << team_id << "," << jersey_num << ",'" << W.esc(first_name) << "','"
+      << W.esc(last_name) << "'," << mpg << "," << ppg << "," << rpg << "," << apg << ","
+      << spg << "," << bpg << ");";
   W.exec(sql.str());
 }
 
