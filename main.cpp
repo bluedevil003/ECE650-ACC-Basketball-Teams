@@ -6,6 +6,30 @@
 using namespace std;
 using namespace pqxx;
 
+void dropTables(connection * C){
+
+}
+
+void createTables(connection * C){
+
+}
+
+void initPlayer(connection * C){
+
+}
+
+void initTeam(connection * C){
+
+}
+
+void initState(connection * C){
+
+}
+
+void initColor(connection * C){
+
+}
+
 int main (int argc, char *argv[]) 
 {
 
@@ -22,15 +46,20 @@ int main (int argc, char *argv[])
       cout << "Can't open database" << endl;
       return 1;
     }
-  } catch (const std::exception &e){
-    cerr << e.what() << std::endl;
+  } catch (const exception &e){
+    cerr << e.what() << endl;
     return 1;
   }
 
 
   //TODO: create PLAYER, TEAM, STATE, and COLOR tables in the ACC_BBALL database
   //      load each table with rows from the provided source txt files
+  try{
 
+  } catch(const exception &e){
+    cerr << e.what() << endl;
+    return 1;
+  }
 
   exercise(C);
 
