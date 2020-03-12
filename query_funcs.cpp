@@ -20,6 +20,7 @@ void add_player(connection * C,
       << W.esc(last_name) << "'," << mpg << "," << ppg << "," << rpg << "," << apg << ","
       << spg << "," << bpg << ");";
   W.exec(sql.str());
+  W.commit();
 }
 
 void add_team(connection * C,
