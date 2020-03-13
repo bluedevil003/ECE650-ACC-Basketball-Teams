@@ -71,7 +71,7 @@ void initPlayer(connection * C) {
 }
 
 void initTeam(connection * C) {
-  int state_id, color_id, wins, losses;
+  int team_id, state_id, color_id, wins, losses;
   string name;
   string line;
   ifstream ifs;
@@ -79,13 +79,14 @@ void initTeam(connection * C) {
   while (getline(ifs, line)) {
     stringstream buffer;
     buffer << line;
-    buffer >> name >> state_id >> color_id >> wins >> losses;
+    buffer >> team_id >> name >> state_id >> color_id >> wins >> losses;
     add_team(C, name, state_id, color_id, wins, losses);
   }
   ifs.close();
 }
 
 void initState(connection * C) {
+  int state_id;
   string name;
   string line;
   ifstream ifs;
@@ -93,13 +94,14 @@ void initState(connection * C) {
   while (getline(ifs, line)) {
     stringstream buffer;
     buffer << line;
-    buffer >> name;
+    buffer >> state_id >> name;
     add_state(C, name);
   }
   ifs.close();
 }
 
 void initColor(connection * C) {
+  int color_id;
   string name;
   string line;
   ifstream ifs;
@@ -107,7 +109,7 @@ void initColor(connection * C) {
   while (getline(ifs, line)) {
     stringstream buffer;
     buffer << line;
-    buffer >> name;
+    buffer >> color_id >> name;
     add_color(C, name);
   }
   ifs.close();
