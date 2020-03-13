@@ -139,6 +139,9 @@ int main(int argc, char * argv[]) {
   try {
     createTables(C);
     initPlayer(C);
+    initTeam(C);
+    initState(C);
+    initColor(C);
   }
   catch (const exception & e) {
     cerr << e.what() << endl;
