@@ -22,20 +22,21 @@ void createTables(connection * C) {
                       "APG INT NOT NULL,"
                       "SPG REAL NOT NULL,"
                       "BPG REAL NOT NULL,"
-                      "CONSTRAINT FOREIGN KEY (TEAM_ID) REFERENCES TEAM(TEAM_ID) "
+                      "CONSTRAINT TEAMFK FOREIGN KEY (TEAM_ID) REFERENCES TEAM(TEAM_ID) "
                       "ON DELETE SET NULL ON UPDATE CASCADE);";
 
-  string team_sql = "CREATE TABLE TEAM("
-                    "TEAM_ID SERIAL PRIMARY KEY NOT NULL,"
-                    "NAME VARCHAR(100) NOT NULL,"
-                    "STATE_ID INT NOT NULL,"
-                    "COLOR_ID INT NOT NULL,"
-                    "WINS INT NOT NULL,"
-                    "LOSSES INT NOT NULL,"
-                    "CONSTRAINT FOREIGN KEY (STATE_ID) REFERENCES STATE(STATE_ID) "
-                    "ON DELETE SET NULL ON UPDATE CASCADE,"
-                    "CONSTRAINT FOREIGN KEY (COLOR_ID) REFERENCES COLOR(COLOR_ID) "
-                    "ON DELETE SET NULL ON UPDATE CASCADE);";
+  string team_sql =
+      "CREATE TABLE TEAM("
+      "TEAM_ID SERIAL PRIMARY KEY NOT NULL,"
+      "NAME VARCHAR(100) NOT NULL,"
+      "STATE_ID INT NOT NULL,"
+      "COLOR_ID INT NOT NULL,"
+      "WINS INT NOT NULL,"
+      "LOSSES INT NOT NULL,"
+      "CONSTRAINT STATEFK FOREIGN KEY (STATE_ID) REFERENCES STATE(STATE_ID) "
+      "ON DELETE SET NULL ON UPDATE CASCADE,"
+      "CONSTRAINT COLORFK FOREIGN KEY (COLOR_ID) REFERENCES COLOR(COLOR_ID) "
+      "ON DELETE SET NULL ON UPDATE CASCADE);";
 
   string state_sql = "CREATE TABLE STATE("
                      "STATE_ID SERIAL PRIMARY KEY NOT NULL,"
