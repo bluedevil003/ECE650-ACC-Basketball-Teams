@@ -72,6 +72,83 @@ void query1(connection * C,
             int use_bpg,
             double min_bpg,
             double max_bpg) {
+  int count = 0;
+  stringstream sql;
+  sql << "SELECT * FROM PLAYER";
+  if (use_mpg) {
+    sql << "WHERE (MPG BETWEEN " << min_mpg << "AND " << max_mpg << ")";
+    count++;
+  }
+  if (use_ppg) {
+    if (count == 0) {
+      sql << "WHERE ";
+    }
+    else {
+      sql << "AND ";
+    }
+    sql << "(PPG BETWEEN " << min_ppg << "AND " << max_ppg << ")";
+    count++;
+  }
+  if (use_rpg) {
+    if (count == 0) {
+      sql << "WHERE ";
+    }
+    else {
+      sql << "AND ";
+    }
+    sql << "(RPG BETWEEN " << min_rpg << "AND " << max_rpg << ")";
+    count++;
+  }
+  if (use_apg) {
+    if (count == 0) {
+      sql << "WHERE ";
+    }
+    else {
+      sql << "AND ";
+    }
+    sql << "(APG BETWEEN " << min_apg << "AND " << max_apg << ")";
+    count++;
+  }
+  if (use_spg) {
+    if (count == 0) {
+      sql << "WHERE ";
+    }
+    else {
+      sql << "AND ";
+    }
+    sql << "(SPG BETWEEN " << min_spg << "AND " << max_spg << ")";
+    count++;
+  }
+  if (use_bpg) {
+    if (count == 0) {
+      sql << "WHERE ";
+    }
+    else {
+      sql << "AND ";
+    }
+    sql << "(BPG BETWEEN " << min_bpg << "AND " << max_bpg << ")";
+    count++;
+  }
+  sql << ";";
+
+  //create a non-transactional object
+  nontransaction N(*C);
+  result R(N.exec(sql.str()));
+  cout << "PLAYER_ID TEAM_ID UNIFORM_NUM FIRST_NAME LAST_NAME MPG PPG RPG APG SPG BPG"
+       << endl;
+  for (result::const_iterator it = R.begin(); it != R.end(); it++) {
+    cout << it[0].as<int>() << " ";
+    cout << it[1].as<int>() << " ";
+    cout << it[2].as<int>() << " ";
+    cout << it[3].as<string>() << " ";
+    cout << it[4].as<string>() << " ";
+    cout << it[5].as<int>() << " ";
+    cout << it[6].as<int>() << " ";
+    cout << it[7].as<int>() << " ";
+    cout << it[8].as<int>() << " ";
+    cout << it[9].as<double>() << " ";
+    cout << it[10].as<double>() << endl;
+  }
 }
 
 void query2(connection * C, string team_color) {
