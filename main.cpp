@@ -147,10 +147,10 @@ int main(int argc, char * argv[]) {
   //      load each table with rows from the provided source txt files
   try {
     createTables(C);
-    initPlayer(C);
-    initTeam(C);
     initState(C);
     initColor(C);
+    initTeam(C);
+    initPlayer(C);
   }
   catch (const exception & e) {
     cerr << e.what() << endl;
