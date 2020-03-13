@@ -152,13 +152,62 @@ void query1(connection * C,
 }
 
 void query2(connection * C, string team_color) {
+  stringstream sql;
+  sql << "SELECT * TEAM.NAME FROM TEAM, COLOR "
+      << "WHERE TEAM.COLOR_ID=COLOR.COLOR_ID AND COLOR.NAME='" << team_color << "';";
+
+  nontransaction N(*C);
+  result R(N.exec(sql.str()));
+  cout << "NAME" << endl;
+  for (result::const_iterator it = R.begin(); it != R.end(); it++) {
+    cout << it[0].as<string>() << endl;
+  }
 }
 
 void query3(connection * C, string team_name) {
+  stringstream sql;
+  sql << "SELECT FIRST_NAME, LAST_NAME FROM PLAYER, TEAM "
+      << "WHERE PLAYER.TEAM_ID=TEAM.TEAM_ID AND NAME='" << team_name << "' "
+      << "ORDERED BY PPG DESC;";
+
+  nontransaction N(*C);
+  result R(N.exec(sql.str()));
+  cout << "FIRST_NAME LAST_NAME" << endl;
+  for (result::const_iterator it = R.begin(); it != R.end(); it++) {
+    cout << it[0].as<string>() << " ";
+    cout << it[1].as<string>() << endl;
+  }
 }
 
 void query4(connection * C, string team_state, string team_color) {
+  stringstream sql;
+  sql << "SELECT FIRST_NAME, LAST_NAME, UNIFORM_NUM FROM PLAYER, TEAM, STATE, COLOR "
+      << "WHERE PLAYER.TEAM_ID=TEAM.TEAM_ID AND TEAM.STATE_ID=STATE.STATE_ID "
+      << "AND TEAM.COLOR_ID=COLOR.COLOR_ID AND "
+      << "COLOR.NAME='" << team_color << "' AND STATE.NAME='" << team_state << "';";
+
+  nontransaction N(*C);
+  result R(N.exec(sql.str()));
+  cout << "FIRST_NAME LAST_NAME UNIFORM_NUM" << endl;
+  for (result::const_iterator it = R.begin(); it != R.end(); it++) {
+    cout << it[0].as<string>() << " ";
+    cout << it[1].as<string>() << " ";
+    cout << it[2].as<int>() << endl;
+  }
 }
 
 void query5(connection * C, int num_wins) {
+  stringstream sql;
+  sql << "SELECT FIRST_NAME, LAST_NAME, TEAM.NAME, WINS FROM PLAYER, TEAM "
+      << "WHERE PLAYER.TEAM_ID=TEAM.TEAM_ID AND WINS>" << num_wins << ";";
+
+  nontransaction N(*C);
+  result R(N.exec(sql.str()));
+  cout << "FIRST_NAME LAST_NAME TEAM_NAME WINS" << endl;
+  for (result::const_iterator it = R.begin(); it != R.end(); it++) {
+    cout << it[0].as<string>() << " ";
+    cout << it[1].as<string>() << " ";
+    cout << it[2].as<string>() << " ";
+    cout << it[3].as<int>() << endl;
+  }
 }
