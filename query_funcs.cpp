@@ -76,57 +76,57 @@ void query1(connection * C,
   stringstream sql;
   sql << "SELECT * FROM PLAYER";
   if (use_mpg) {
-    sql << "WHERE (MPG BETWEEN " << min_mpg << "AND " << max_mpg << ")";
+    sql << " WHERE (MPG BETWEEN " << min_mpg << " AND " << max_mpg << ")";
     count++;
   }
   if (use_ppg) {
     if (count == 0) {
-      sql << "WHERE ";
+      sql << " WHERE ";
     }
     else {
-      sql << "AND ";
+      sql << " AND ";
     }
-    sql << "(PPG BETWEEN " << min_ppg << "AND " << max_ppg << ")";
+    sql << "(PPG BETWEEN " << min_ppg << " AND " << max_ppg << ")";
     count++;
   }
   if (use_rpg) {
     if (count == 0) {
-      sql << "WHERE ";
+      sql << " WHERE ";
     }
     else {
-      sql << "AND ";
+      sql << " AND ";
     }
-    sql << "(RPG BETWEEN " << min_rpg << "AND " << max_rpg << ")";
+    sql << "(RPG BETWEEN " << min_rpg << " AND " << max_rpg << ")";
     count++;
   }
   if (use_apg) {
     if (count == 0) {
-      sql << "WHERE ";
+      sql << " WHERE ";
     }
     else {
-      sql << "AND ";
+      sql << " AND ";
     }
-    sql << "(APG BETWEEN " << min_apg << "AND " << max_apg << ")";
+    sql << "(APG BETWEEN " << min_apg << " AND " << max_apg << ")";
     count++;
   }
   if (use_spg) {
     if (count == 0) {
-      sql << "WHERE ";
+      sql << " WHERE ";
     }
     else {
-      sql << "AND ";
+      sql << " AND ";
     }
-    sql << "(SPG BETWEEN " << min_spg << "AND " << max_spg << ")";
+    sql << "(SPG BETWEEN " << min_spg << " AND " << max_spg << ")";
     count++;
   }
   if (use_bpg) {
     if (count == 0) {
-      sql << "WHERE ";
+      sql << " WHERE ";
     }
     else {
-      sql << "AND ";
+      sql << " AND ";
     }
-    sql << "(BPG BETWEEN " << min_bpg << "AND " << max_bpg << ")";
+    sql << "(BPG BETWEEN " << min_bpg << " AND " << max_bpg << ")";
     count++;
   }
   sql << ";";
