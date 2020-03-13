@@ -48,7 +48,7 @@ void add_state(connection * C, string name) {
 void add_color(connection * C, string name) {
   work W(*C);
   stringstream sql;
-  sql << "INSERT INTO STATE (NAME) VALUES ('" << name << "');";
+  sql << "INSERT INTO COLOR (NAME) VALUES ('" << name << "');";
   W.exec(sql.str());
   W.commit();
 }
