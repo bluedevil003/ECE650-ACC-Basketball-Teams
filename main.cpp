@@ -10,20 +10,13 @@ using namespace pqxx;
 void createTables(connection * C) {
   string drop_sql = "DROP TABLE IF EXISTS PLAYER, TEAM, STATE, COLOR;";
 
-  string player_sql = "CREATE TABLE PLAYER("
-                      "PLAYER_ID SERIAL PRIMARY KEY NOT NULL,"
-                      "TEAM_ID INT NOT NULL,"
-                      "UNIFORM_NUM INT NOT NULL,"
-                      "FIRST_NAME VARCHAR(100) NOT NULL,"
-                      "LAST_NAME VARCHAR(100) NOT NULL,"
-                      "MPG INT NOT NULL,"
-                      "PPG INT NOT NULL,"
-                      "RPG INT NOT NULL,"
-                      "APG INT NOT NULL,"
-                      "SPG REAL NOT NULL,"
-                      "BPG REAL NOT NULL,"
-                      "CONSTRAINT TEAMFK FOREIGN KEY (TEAM_ID) REFERENCES TEAM(TEAM_ID) "
-                      "ON DELETE SET NULL ON UPDATE CASCADE);";
+  string state_sql = "CREATE TABLE STATE("
+                     "STATE_ID SERIAL PRIMARY KEY NOT NULL,"
+                     "NAME VARCHAR(100) NOT NULL);";
+
+  string color_sql = "CREATE TABLE COLOR("
+                     "COLOR_ID SERIAL PRIMARY KEY NOT NULL,"
+                     "NAME VARCHAR(100) NOT NULL);";
 
   string team_sql =
       "CREATE TABLE TEAM("
@@ -38,13 +31,20 @@ void createTables(connection * C) {
       "CONSTRAINT COLORFK FOREIGN KEY (COLOR_ID) REFERENCES COLOR(COLOR_ID) "
       "ON DELETE SET NULL ON UPDATE CASCADE);";
 
-  string state_sql = "CREATE TABLE STATE("
-                     "STATE_ID SERIAL PRIMARY KEY NOT NULL,"
-                     "NAME VARCHAR(100) NOT NULL);";
-
-  string color_sql = "CREATE TABLE COLOR("
-                     "COLOR_ID SERIAL PRIMARY KEY NOT NULL,"
-                     "NAME VARCHAR(100) NOT NULL);";
+  string player_sql = "CREATE TABLE PLAYER("
+                      "PLAYER_ID SERIAL PRIMARY KEY NOT NULL,"
+                      "TEAM_ID INT NOT NULL,"
+                      "UNIFORM_NUM INT NOT NULL,"
+                      "FIRST_NAME VARCHAR(100) NOT NULL,"
+                      "LAST_NAME VARCHAR(100) NOT NULL,"
+                      "MPG INT NOT NULL,"
+                      "PPG INT NOT NULL,"
+                      "RPG INT NOT NULL,"
+                      "APG INT NOT NULL,"
+                      "SPG REAL NOT NULL,"
+                      "BPG REAL NOT NULL,"
+                      "CONSTRAINT TEAMFK FOREIGN KEY (TEAM_ID) REFERENCES TEAM(TEAM_ID) "
+                      "ON DELETE SET NULL ON UPDATE CASCADE);";
 
   //create a transactional object
   work W(*C);
