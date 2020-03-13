@@ -29,12 +29,28 @@ void add_team(connection * C,
               int color_id,
               int wins,
               int losses) {
+  work W(*C);
+  stringstream sql;
+  sql << "INSERT INTO TEAM (NAME,STATE_ID,COLOR_ID,WINS,LOSSES) VALUES ('" << name << "',"
+      << state_id << "," << color_id << "," << wins << "," << losses << ");";
+  W.exec(sql.str());
+  W.commit();
 }
 
 void add_state(connection * C, string name) {
+  work W(*C);
+  stringstream sql;
+  sql << "INSERT INTO STATE (NAME) VALUES ('" << name << "');";
+  W.exec(sql.str());
+  W.commit();
 }
 
 void add_color(connection * C, string name) {
+  work W(*C);
+  stringstream sql;
+  sql << "INSERT INTO STATE (NAME) VALUES ('" << name << "');";
+  W.exec(sql.str());
+  W.commit();
 }
 
 void query1(connection * C,

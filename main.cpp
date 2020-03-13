@@ -71,12 +71,46 @@ void initPlayer(connection * C) {
 }
 
 void initTeam(connection * C) {
+  int state_id, color_id, wins, losses;
+  string name;
+  string line;
+  ifstream ifs;
+  ifs.open("team.txt", ifstream::in);
+  while (getline(ifs, line)) {
+    stringstream buffer;
+    buffer << line;
+    buffer >> name >> state_id >> color_id >> wins >> losses;
+    add_team(C, name, state_id, color_id, wins, losses);
+  }
+  ifs.close();
 }
 
 void initState(connection * C) {
+  string name;
+  string line;
+  ifstream ifs;
+  ifs.open("state.txt", ifstream::in);
+  while (getline(ifs, line)) {
+    stringstream buffer;
+    buffer << line;
+    buffer >> name;
+    add_state(C, name);
+  }
+  ifs.close();
 }
 
 void initColor(connection * C) {
+  string name;
+  string line;
+  ifstream ifs;
+  ifs.open("color.txt", ifstream::in);
+  while (getline(ifs, line)) {
+    stringstream buffer;
+    buffer << line;
+    buffer >> name;
+    add_color(C, name);
+  }
+  ifs.close();
 }
 
 int main(int argc, char * argv[]) {
