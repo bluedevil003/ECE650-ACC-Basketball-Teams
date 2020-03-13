@@ -51,11 +51,10 @@ void createTables(connection * C) {
 
   //execute SQL query
   W.exec(drop_sql);
-  W.exec(player_sql);
-  W.exec(team_sql);
   W.exec(state_sql);
   W.exec(color_sql);
-
+  W.exec(team_sql);
+  W.exec(player_sql);
   W.commit();
 }
 
