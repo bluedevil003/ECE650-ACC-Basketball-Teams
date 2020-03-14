@@ -153,7 +153,7 @@ void query1(connection * C,
 
 void query2(connection * C, string team_color) {
   stringstream sql;
-  sql << "SELECT * TEAM.NAME FROM TEAM, COLOR "
+  sql << "SELECT TEAM.NAME FROM TEAM, COLOR "
       << "WHERE TEAM.COLOR_ID=COLOR.COLOR_ID AND COLOR.NAME='" << team_color << "';";
 
   nontransaction N(*C);
