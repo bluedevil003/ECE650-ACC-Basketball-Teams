@@ -168,7 +168,7 @@ void query3(connection * C, string team_name) {
   stringstream sql;
   sql << "SELECT FIRST_NAME, LAST_NAME FROM PLAYER, TEAM "
       << "WHERE PLAYER.TEAM_ID=TEAM.TEAM_ID AND NAME='" << team_name << "' "
-      << "ORDERED BY PPG DESC;";
+      << "ORDER BY PPG DESC;";
 
   nontransaction N(*C);
   result R(N.exec(sql.str()));
