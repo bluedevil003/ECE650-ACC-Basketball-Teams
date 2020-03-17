@@ -37,6 +37,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'acc'
 ]
 
 MIDDLEWARE = [
@@ -79,7 +80,6 @@ DATABASES = {
         'NAME': 'ACC_BBALL',
         'USER': 'postgres',
         'PASSWORD': 'passw0rd',
-        'HOST': '127.0.0.1',
     }
 }
 

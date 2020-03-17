@@ -1,4 +1,5 @@
 #include "query_funcs.h"
+#include <iomanip>
 
 void add_player(connection * C,
                 int team_id,
@@ -146,7 +147,7 @@ void query1(connection * C,
     cout << it[6].as<int>() << " ";
     cout << it[7].as<int>() << " ";
     cout << it[8].as<int>() << " ";
-    cout << it[9].as<double>() << " ";
+    cout << fixed << setprecision(1) << it[9].as<double>() << " ";
     cout << it[10].as<double>() << endl;
   }
 }
@@ -203,7 +204,7 @@ void query5(connection * C, int num_wins) {
 
   nontransaction N(*C);
   result R(N.exec(sql.str()));
-  cout << "FIRST_NAME LAST_NAME TEAM_NAME WINS" << endl;
+  cout << "FIRST_NAME LAST_NAME NAME WINS" << endl;
   for (result::const_iterator it = R.begin(); it != R.end(); it++) {
     cout << it[0].as<string>() << " ";
     cout << it[1].as<string>() << " ";

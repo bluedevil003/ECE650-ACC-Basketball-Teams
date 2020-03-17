@@ -1,4 +1,10 @@
-from ncaa.models import Player, Team, State, Color
+import os
+os.environ.setdefault("DJANGO_SETTINGS_MODULE", "orm.settings")
+
+import django
+django.setup()
+
+from acc.models import Player, Team, State, Color
 
 def query1(use_mpg, min_mpg, max_mpg, use_ppg, min_ppg, max_ppg, use_rpg, min_rpg, max_rpg, use_apg, min_apg, max_apg, use_spg, min_spg, max_spg, use_bpg, min_bpg, max_bpg):
     R = Player.objects.all()
@@ -16,7 +22,7 @@ def query1(use_mpg, min_mpg, max_mpg, use_ppg, min_ppg, max_ppg, use_rpg, min_rp
         R = R.filter(bpg__lte = max_bpg, bpg__gte = min_bpg)
     print("PLAYER_ID TEAM_ID UNIFORM_NUM FIRST_NAME LAST_NAME MPG PPG RPG APG SPG BPG")
     for r in R:
-        print(r.player_id, r.team_id, r.uniform_num, r.first_name, r.last_name, r.mpg, r.ppg, r.rpg, r.apg, r.spg, r.bpg)
+        print(r.player_id, r.team_id.team_id, r.uniform_num, r.first_name, r.last_name, r.mpg, r.ppg, r.rpg, r.apg, r.spg, r.bpg)
     return
 
 
@@ -35,7 +41,7 @@ def query3(team_name):
     return
 
 def query4(team_state, team_color):
-    R = Player.objects.filter(team_id__state_id__name = team_state, team_id__color_id__name = team_color)
+    R = Player.objects.filter(team_id__state_id__name = team_state, team_id__color_id__name = team_color).order_by('player_id')
     print("FIRST_NAME LAST_NAME UNIFORM_NUM")
     for r in R:
         print(r.first_name, r.last_name, r.uniform_num)
